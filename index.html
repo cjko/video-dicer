@@ -1,33 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>dicer</title>
+	<title>video-dicer</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+	<script type="text/javascript"></script>
 	<script src="https://use.fontawesome.com/680ef57b8e.js"></script>
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	<style type="text/css">
+		body {
+
+		}
 		.title {
 			font-weight: bold;
 		}
+		.jumbotron-bg {
+			/*background-image: url("img/8.jpg");*/
+		}
+		.mt {
+			margin-top: 4em;
+		}
+		.footer-logo {
+			height: 32px;
+			width: auto;
+			display: block;
+			margin: 10px;
+		}
+		#progressbar .ui-progressbar-value {
+	    background-color: #ccc;
+	  }
 	</style>
+
+	<script>
+  $( function() {
+    $( "#progressbar" ).progressbar({
+      value: true
+    });
+    $( "button" ).on( "click", function( event ) {
+      var target = $( event.target ),
+        progressbar = $( "#progressbar" ),
+        progressbarValue = progressbar.find( ".ui-progressbar-value" );
+ 
+      if ( target.is( "#numButton" ) ) {
+        progressbar.progressbar( "option", {
+          value: Math.floor( Math.random() * 100 )
+        });
+      } else if ( target.is( "#colorButton" ) ) {
+        progressbarValue.css({
+          "background": '#' + Math.floor( Math.random() * 16777215 ).toString( 16 )
+        });
+      } else if ( target.is( "#falseButton" ) ) {
+        progressbar.progressbar( "option", "value", false );
+        console.log(progressbar);
+      	console.log(progressbarValue);
+      }
+    });
+  } );
+  </script>
 </head>
 <body>
 	<div class="container">
-		<div class="jumbotron">
-			<h1 class="title display-4">Video Dicer</h1>
-			<p class="lead">Slice instructional tutorial videos into traversable, loopable sections to easily manage and follow along with.</p>
+		<div class="jumbotron jumbotron-bg mt">
+			<h1 class="title display-4">video-dicer</h1>
+			<p class="lead">Slice instructional tutorial videos into traversable, loopable sections to easily manage and follow along with. Great for video recipes and instructables. Find free downloadable video recipes at sites like <a href="https://www.tasty.co/" target="_new">https://www.tasty.co/</a>.</p>
 			<hr class="my-4" />
-			<p>Copy and paste a link to a video file (.mp4, .webm) below to begin.</p>
+			<p class="lead">Choose a video file (.mp4, .webm) to upload below:</p>
 			<form>
 				<div class="form-group">
 					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<button class="btn btn-primary">Browse&#8230;</button>
+						</div>
 						<input type="text" class="form-control" name="video_url" />
 						<div class="input-group-append">
-							<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+							 <button class="btn btn-success"><i class="fa fa-upload" aria-hidden="true"></i></button>
 						</div>
-					</div
+					</div>
 				</div>
 			</form>
+			<div id="progressbar">asdf</div>
+			<button id="falseButton">Indeterminate</button>
+			<button id="colorButton">Random Color</button>
 		</div>
 	</div>
+	<footer>
+		<!--Copyright-->
+    <div class="footer-copyright text-center">
+        <div class="container">
+        	<center><img class="footer-logo" src="img/logo.png"/></center>
+          © 2017 <a href="http://www.colinjao.com">Colin Jao</a>
+
+        </div>
+    </div>
+    <!--/.Copyright-->
+	</footer>
 </body>
 </html>
